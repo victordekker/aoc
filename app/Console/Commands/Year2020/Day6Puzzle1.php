@@ -16,9 +16,7 @@ class Day6Puzzle1 extends Year2020
      */
     protected function solve(string $data)
     {
-        $data = explode("\n\n", $data);
-
-        $this->answer = collect($data)
+        $this->answer = $this->explodePerEmptyLine($data)
             ->map(function (string $group) {
                 return $this->getCountForGroup($group);
             })

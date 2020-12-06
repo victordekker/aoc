@@ -64,8 +64,18 @@ abstract class AdventOfCodeCommand extends Command
         return collect(explode("\n", $data))
 
             // Make sure we do not count empty lines
-            ->filter(function ($number) {
-                return $number !== '';
+            ->filter(function ($line) {
+                return $line !== '';
+            });
+    }
+
+    protected function explodePerEmptyLine(string $data)
+    {
+        return collect(explode("\n\n", $data))
+
+            // Make sure we do not count empty lines
+            ->filter(function ($lines) {
+                return $lines !== '';
             });
     }
 }

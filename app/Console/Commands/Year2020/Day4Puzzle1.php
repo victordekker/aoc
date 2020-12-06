@@ -18,7 +18,7 @@ class Day4Puzzle1 extends Year2020
      */
     protected function solve(string $data)
     {
-        $this->answer = collect(explode("\n\n", $data))
+        $this->answer = $this->explodePerEmptyLine($data)
             ->map(function (string $passport) {
                 return $this->parsePassport($passport);
             })
