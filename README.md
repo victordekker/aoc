@@ -6,7 +6,7 @@ The code base uses the [Laravel framework](https://laravel.com/).
 
 ## Solutions to the puzzles
 
-You can find my solutions to the different problems under ``App\Console\Commands``. 
+You can find my solutions to the different problems under [``App\Console\Commands``](https://github.com/victordekker/aoc/tree/master/app/Console/Commands). 
 
 To run these solutions, use the commands (like `php artisan aoc2020:d1p1 input.txt`). 
 
