@@ -13,11 +13,17 @@ abstract class AdventOfCodeCommand extends Command
 
     protected int $part;
 
+    protected bool $inputIsFilename = true;
+
     protected $answer = null;
 
     public function __construct()
     {
-        $this->signature = $this->signature ?: "aoc{$this->year}:d{$this->day}p{$this->part} {file : input file}";
+        if (empty($this->signature)) {
+            $this->signature = "aoc{$this->year}:d{$this->day}p{$this->part} " .
+                ($this->inputIsFilename ? '{file : input file}' : '{input : input string}');
+        }
+
         parent::__construct();
     }
 
@@ -56,7 +62,9 @@ abstract class AdventOfCodeCommand extends Command
      */
     protected function getData()
     {
-        return File::get($this->input->getArgument('file'));
+        return $this->inputIsFilename
+            ? File::get($this->input->getArgument('file'))
+            : $this->input->getArgument('input');
     }
 
     protected function explodePerLine(string $data)

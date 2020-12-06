@@ -6,18 +6,9 @@ class Day4Puzzle1 extends Year2015
 {
     protected int $day = 4;
     protected int $part = 1;
-
-    protected $signature = "aoc2015:d4p1 {input : input data}";
+    protected bool $inputIsFilename = false;
 
     const TARGET = '00000';
-
-    /**
-     * @return string
-     */
-    protected function getData()
-    {
-        return $this->input->getArgument('input');
-    }
 
     /**
      * Solve the puzzle.
