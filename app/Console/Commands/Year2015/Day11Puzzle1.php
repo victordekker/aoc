@@ -22,6 +22,8 @@ class Day11Puzzle1 extends Year2015
         $mustContainAnyOf = $this->getStraights();
         $cannotContainAnyOf = collect(['i', 'o', 'l']);
 
+        $data = $this->incrementPassword($data);
+
         while (! $this->isValid($data, $mustContainAnyOf, $cannotContainAnyOf)) {
             $data = $this->incrementPassword($data);
         }
