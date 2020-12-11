@@ -52,38 +52,43 @@ class Day11Puzzle1 extends Year2020
 
         for ($y = 0; $y < $height; $y++) {
             for ($x = 0; $x < $length; $x++) {
-                $seat = $current[$y][$x];
-                $countAdjacentOccupiedSeats = 0;
-
-                if ($y - 1 >= 0) {
-                    $countAdjacentOccupiedSeats +=
-                        (($x - 1 >= 0) ? ($current[$y - 1][$x - 1] == static::OCCUPIED) : 0) +
-                        ($current[$y - 1][$x] == static::OCCUPIED) +
-                        (($x + 1 < $length) ? ($current[$y - 1][$x + 1] == static::OCCUPIED) : 0);
-                }
-
-                $countAdjacentOccupiedSeats +=
-                    (($x - 1 >= 0) ? ($current[$y][$x - 1] == static::OCCUPIED) : 0) +
-                    (($x + 1 < $length) ? ($current[$y][$x + 1] == static::OCCUPIED) : 0);
-
-                if (($y + 1) < $height) {
-                    $countAdjacentOccupiedSeats +=
-                        (($x - 1 >= 0) ? ($current[$y + 1][$x - 1] == static::OCCUPIED) : 0) +
-                        ($current[$y + 1][$x] == static::OCCUPIED) +
-                        (($x + 1 < $length) ? ($current[$y + 1][$x + 1] == static::OCCUPIED) : 0);
-                }
-
-                if ($seat == static::EMPTY && $countAdjacentOccupiedSeats == 0) {
-                    $seat = static::OCCUPIED;
-                } else if ($seat == static::OCCUPIED && $countAdjacentOccupiedSeats >= 4) {
-                    $seat = static::EMPTY;
-                }
-
-                $new[$y][] = $seat;
+                $new[$y][] = $this->getNewSeatValue($x, $y, $current, $length, $height);
             }
         }
 
         return $new;
+    }
+
+    protected function getNewSeatValue($x, $y, $current, $length, $height)
+    {
+        $seat = $current[$y][$x];
+        $countAdjacentOccupiedSeats = 0;
+
+        if ($y - 1 >= 0) {
+            $countAdjacentOccupiedSeats +=
+                (($x - 1 >= 0) ? ($current[$y - 1][$x - 1] == static::OCCUPIED) : 0) +
+                ($current[$y - 1][$x] == static::OCCUPIED) +
+                (($x + 1 < $length) ? ($current[$y - 1][$x + 1] == static::OCCUPIED) : 0);
+        }
+
+        $countAdjacentOccupiedSeats +=
+            (($x - 1 >= 0) ? ($current[$y][$x - 1] == static::OCCUPIED) : 0) +
+            (($x + 1 < $length) ? ($current[$y][$x + 1] == static::OCCUPIED) : 0);
+
+        if (($y + 1) < $height) {
+            $countAdjacentOccupiedSeats +=
+                (($x - 1 >= 0) ? ($current[$y + 1][$x - 1] == static::OCCUPIED) : 0) +
+                ($current[$y + 1][$x] == static::OCCUPIED) +
+                (($x + 1 < $length) ? ($current[$y + 1][$x + 1] == static::OCCUPIED) : 0);
+        }
+
+        if ($seat == static::EMPTY && $countAdjacentOccupiedSeats == 0) {
+            $seat = static::OCCUPIED;
+        } else if ($seat == static::OCCUPIED && $countAdjacentOccupiedSeats >= 4) {
+            $seat = static::EMPTY;
+        }
+
+        return $seat;
     }
 
     protected function countOccupiedSeats(Collection $generation)
