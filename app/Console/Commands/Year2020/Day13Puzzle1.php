@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands\Year2020;
 
-class Day13Puzzle1 extends Day12Puzzle1
+class Day13Puzzle1 extends Year2020
 {
     protected int $day = 13;
     protected int $part = 1;
