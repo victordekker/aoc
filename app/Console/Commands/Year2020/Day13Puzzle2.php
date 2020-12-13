@@ -23,15 +23,11 @@ class Day13Puzzle2 extends Day13Puzzle1
             return $bus != 'x';
         });
 
-        $timestamp = 0;
-        $progress = $this->output->createProgressBar();
+        $timestamp = 100000000000000;
 
         while (! $this->validateTimestamp($timestamp, $busses)) {
             $timestamp++;
-            $progress->advance();
         }
-
-        $progress->finish();
 
         $this->answer = $timestamp;
     }
