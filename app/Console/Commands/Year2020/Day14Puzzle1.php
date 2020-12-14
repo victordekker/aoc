@@ -48,7 +48,7 @@ class Day14Puzzle1 extends Year2020
         preg_match('/mem\[(\d+)] = (\d*)/', $line, $matches);
 
         return [
-            'target' => $matches[1],
+            'target' => (int) $matches[1],
             'value' => (int) $matches[2],
         ];
     }
@@ -60,12 +60,12 @@ class Day14Puzzle1 extends Year2020
         preg_match_all('/0/', $mask, $matches, PREG_OFFSET_CAPTURE);
 
         $number = collect($matches[0])
-            ->map(function ($match) {
-                return $match[1];
+            ->map(function ($match) use ($maskLength) {
+                return $maskLength - ((int) $match[1]) - 1;
             })
             ->values()
             ->map(function ($number) use ($maskLength) {
-                return pow(2, $maskLength - $number - 1);
+                return pow(2, $number);
             })
             ->sum();
 
@@ -75,12 +75,12 @@ class Day14Puzzle1 extends Year2020
         preg_match_all('/1/', $mask, $matches, PREG_OFFSET_CAPTURE);
 
         $number = collect($matches[0])
-            ->map(function ($match) {
-                return $match[1];
+            ->map(function ($match) use ($maskLength) {
+                return $maskLength - ((int) $match[1]) - 1;
             })
             ->values()
             ->map(function ($number) use ($maskLength) {
-                return pow(2, $maskLength - $number - 1);
+                return pow(2, $number);
             })
             ->sum();
 
